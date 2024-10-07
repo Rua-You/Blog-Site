@@ -46,3 +46,7 @@ body{
 #input-basis-email, #email-icon {
     background-color: #ECE6F0;
 }
+
+.navbar-nav li{
+    margin-left: 20px;
+}
