@@ -1,0 +1,48 @@
+.page-bar{
+    width: 100%;
+    height: 18px;
+    background: #3A549F;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    /* make the footer at the bottom */
+    flex-direction: column;
+}
+
+.navbar{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#start-page-title{
+    width: 699px;
+    height: 138px;
+    margin-top: 95px;
+    margin-left: 100px;
+}
+#start-page-title h1{
+    font-size: 60px;
+}
+/* subtitle */
+#start-page-title h3{
+    color: gray;
+}
+
+#input-email{
+    margin: auto;
+    width: 50%;
+    margin-bottom: 105px;
+}
+#input-email h6{
+    color: gray;
+}
+#input-email ::placeholder{
+    text-align: center;
+    color: gray;
+}
+
+#input-basis-email, #email-icon {
+    background-color: #ECE6F0;
+}
