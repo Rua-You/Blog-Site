@@ -1,0 +1,37 @@
+.page-bar a{
+    margin-left: 10px;
+    color: white;
+    text-decoration: underline;
+    font-size: 12px;
+}
+
+/* overwrite */
+body {
+    margin-top: 18px !important;
+    overflow-y: hidden !important;
+}
+
+/* overwrite */
+.footer {
+    margin-top: 0px !important;
+    /* margin-bottom: 0 !important; */
+    /* position: fixed; */
+}
+
+.mapouter {
+    position: relative;
+    text-align: right;
+    height: calc(100vh - 36px);
+    width: 100%;
+}
+
+.gmap_canvas {
+    overflow: hidden;
+    background: none !important;
+    height: calc(100vh - 36px);
+    width: 100%;
+}
+
+.map-links {
+    text-align: center; /* Center the links below the map */
+}
