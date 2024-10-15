@@ -33,9 +33,15 @@
                         <li class="nav-item d-flex">
                             <a class="nav-link" href="#">About Universities</a>
                         </li>
-                        <li class="nav-item d-flex">
-                            <a href="{% url "login" %}"><button class="btn btn-small btn-outline-secondary">Sign in</button></a>
-                        </li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item d-flex">
+                                <a href="{% url "index" %}"><button class="btn btn-small btn-outline-secondary">Log out</button></a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item d-flex">
+                                <a href="{% url "login" %}"><button class="btn btn-small btn-outline-secondary">Sign in</button></a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </nav>
             </div>
