@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .profile-container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 80%;
+            margin: 50px auto;
+        }
+
+        /* Left section (image, profile heading, and edit button) */
+        .profile-left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Align items to the left */
+        }
+
+        .profile-icon {
+            width: 150px;
+            height: 150px;
+            background-color: #e8d9f9;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        .profile-left h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .edit-btn {
+            background-color: #867ae9;
+            color: white;
+            border-radius: 50px;
+            padding: 10px 20px;
+            border: none;
+            margin-top: 10px;
+        }
+
+        /* Right section (input fields) */
+        .profile-right {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .profile-right input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #c4b6f3;
+            border-radius: 20px;
+            margin-bottom: 15px;
+        }
+
+        .profile-right input::placeholder {
+            color: #8a86a9;
+        }
+
+        .navbar-nav .nav-link {
+            color: black;
+        }
+
+        .footer {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Section (reuse from the main page) -->
+    <div class="header">
+        <div class="page-bar"></div>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <img src="../statics/images/alumni web logo 1.png" width="83" height="70">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item d-flex">
+                    <a class="nav-link" href="#">The Map</a>
+                </li>
+                <li class="nav-item d-flex">
+                    <a class="nav-link" href="#">Get in Touch</a>
+                </li>
+                <li class="nav-item d-flex">
+                    <a class="nav-link" href="#">About Universities</a>
+                </li>
+                <li class="nav-item d-flex">
+                    <button class="btn btn-small btn-outline-secondary">Sign in</button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Profile Section -->
+    <div class="profile-container">
+        <!-- Left side: profile icon, profile text, and edit button -->
+        <div class="profile-left">
+            <div class="profile-icon"></div>
+            <h1>PROFILE</h1>
+            <button class="edit-btn">Edit</button>
+        </div>
+
+        <!-- Right side: input fields -->
+        <div class="profile-right">
+            <input type="text" placeholder="Your Username">
+            <input type="text" placeholder="Your Bio">
+            <input type="text" placeholder="Your Contact-Info">
+            <input type="text" placeholder="Comment Box??">
+        </div>
+    </div>
+
+    <!-- Footer Section (reuse from the main page) -->
+    <div class="footer">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <ul class="navbar-nav w-100 justify-content-between">
+                <li></li>
+                <li></li>
+                <li class="nav-item d-flex">
+                    <a class="nav-link" href="#"><b>The Map</b></a>
+                </li>
+                <li class="nav-item d-flex">
+                    <a class="nav-link" href="#"><b>Get in Touch</b></a>
+                </li>
+                <li class="nav-item d-flex">
+                    <a class="nav-link" href="#"><b>About Universities</b></a>
+                </li>
+            </ul>
+        </nav>
+        <div class="page-bar"></div>
+    </div>
+
+</body>
+
+</html>
