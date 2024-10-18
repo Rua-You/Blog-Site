@@ -31,15 +31,15 @@
                             <a class="nav-link" href="#">Get in Touch</a>
                         </li>
                         <li class="nav-item d-flex">
-                            <a class="nav-link" href="#">About Universities</a>
+                            <a class="nav-link" href="https://www.usnews.com/best-colleges/rankings/national-universities">About Universities</a>
                         </li>
                         {% if user.is_authenticated %}
                             <li class="nav-item d-flex">
-                                <a href="{% url "index" %}"><button class="btn btn-small btn-outline-secondary">Log out</button></a>
+                                <a href="{% url "logout" %}"><button class="btn btn-small btn-outline-secondary">Logout</button></a>
                             </li>
                         {% else %}
                             <li class="nav-item d-flex">
-                                <a href="{% url "login" %}"><button class="btn btn-small btn-outline-secondary">Sign in</button></a>
+                                <a href="{% url "login" %}"><button class="btn btn-small btn-outline-secondary">Sign in / Register</button></a>
                             </li>
                         {% endif %}
                     </ul>
@@ -68,7 +68,7 @@
                             <a class="nav-link" href="#"><b>Get in Touch</b></a>
                         </li>
                         <li class="nav-item d-flex">
-                            <a class="nav-link" href="#"><b>About Universities</b></a>
+                            <a class="nav-link" href="https://www.usnews.com/best-colleges/rankings/national-universities"><b>About Universities</b></a>
                         </li>
                     </ul>
                 </nav>

@@ -18,7 +18,7 @@ body {
     /* position: fixed; */
 }
 
-.mapouter {
+#map {
     position: relative;
     text-align: right;
     height: calc(100vh - 36px);
@@ -30,8 +30,4 @@ body {
     background: none !important;
     height: calc(100vh - 36px);
     width: 100%;
-}
-
-.map-links {
-    text-align: center; /* Center the links below the map */
 }
