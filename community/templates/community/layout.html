@@ -4,7 +4,8 @@
 <html lang="en">
     
     <head>
-        <title> BASIS Alumni Map </title>
+        <title> {% block title %}{% endblock title %} | BASIS Alumni Map </title>
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link href="{% static 'community/style.css' %}" rel="stylesheet">
@@ -13,13 +14,14 @@
     </head>
 
     <body>
-        {% block header %}
-            <div class="header">
+        
+        <header>
+            <div class="fixed-top">
                 <div class="page-bar"></div>
                 <nav class="navbar navbar-expand-lg bg-body-tertiary">
                     <!-- phoenix icon -->
                     <a href="{% url "index" %}">
-                        <img src="{% static "community/images/alumni web logo 1.png" %}" width="83" height="70">
+                        <img src="{% static "community/images/alumni web logo 1.png" %}" width="52" height="70">
                     </a>
                     
                     <!-- ms-auto: align items to the right -->
@@ -28,12 +30,16 @@
                             <a class="nav-link" href="{% url "map" %}">The Map</a>
                         </li>
                         <li class="nav-item d-flex">
-                            <a class="nav-link" href="#">Get in Touch</a>
+                            <a class="nav-link" href="{% url "database" %}">Database</a>
                         </li>
                         <li class="nav-item d-flex">
                             <a class="nav-link" href="https://www.usnews.com/best-colleges/rankings/national-universities">About Universities</a>
                         </li>
+                        <!-- show the user's name if they're signed in, show the sign in button otherwise -->
                         {% if user.is_authenticated %}
+                            <li class="nav-item d-flex">
+                                <a class="nav-link" href="{% url "profile" user.slug %}">My Profile</a>
+                            </li>
                             <li class="nav-item d-flex">
                                 <a href="{% url "logout" %}"><button class="btn btn-small btn-outline-secondary">Logout</button></a>
                             </li>
@@ -45,35 +51,19 @@
                     </ul>
                 </nav>
             </div>
-        {% endblock header %}
-
+        <header>
         
+
         <!-- body -->
-        {% block body %}
-        {% endblock body %}
+        <div id="main-body">
+            {% block body %}
+            {% endblock body %}
+        </div>
 
 
-        {% block footer %}
-            <div class="footer">
-                <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                    <!-- "w-100 justify-content-between": evenly space the item -->
-                    <ul class="navbar-nav w-100 justify-content-between">
-                        <!-- the 2 empty li is to populate the navbar -->
-                        <li></li>
-                        <li></li>
-                        <li class="nav-item d-flex">
-                            <a class="nav-link" href="{% url "map" %}"><b>The Map</b></a>
-                        </li>
-                        <li class="nav-item d-flex">
-                            <a class="nav-link" href="#"><b>Get in Touch</b></a>
-                        </li>
-                        <li class="nav-item d-flex">
-                            <a class="nav-link" href="https://www.usnews.com/best-colleges/rankings/national-universities"><b>About Universities</b></a>
-                        </li>
-                    </ul>
-                </nav>
-                <div class="page-bar"></div>
-            </div>
-        {% endblock footer %}
+        <!-- footer -->
+        <footer>
+            <div class="page-bar"></div>
+        </footer>
     </body>
 </html>

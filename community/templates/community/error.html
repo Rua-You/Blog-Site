@@ -1,0 +1,13 @@
+{% extends "community/layout.html" %}
+{% load static %}
+
+{% block title %} Error {% endblock title %}
+
+{% block body %}
+    <div class="page-offset d-flex flex-colum flex-wrap align-items-center justify-content-center">
+        <h1>ERROR: &nbsp</h1>
+        {% for message in messages %}
+            <h2>{{ message }}</h2>
+        {% endfor %}
+    </div>
+{% endblock body %}

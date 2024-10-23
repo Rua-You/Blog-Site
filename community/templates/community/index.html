@@ -1,45 +1,28 @@
 {% extends "community/layout.html" %}
 {% load static %}
 
-{% block body %}
-    <div class="page">
-        <!-- title & subtitle -->
-        <div class="home-page-title" style="margin-top: 95px;">
-            <img src="{% static "community/images/location_on.png" %}" width="25" height="25" style="margin-left: 275px;">
-            <h1><b>ALUMNI MAP</b></h1>
-            <h3>BASIS International/Bilingual School · China</h3>
-        </div>
+{% block title %}Home{% endblock title %}
 
-        <!-- input BASIS email -->
-        <div id="input-email">
-            <h6><i>Verify Your BASIS Student Status</i></h6>
-            <form>
-                <div class="input-group">
-                    <span id="email-icon" class="input-group-text rounded-start-pill">✉</span>
-                    <input id="input-basis-email" class="rounded-end-pill form-control" type="email" placeholder="you@basischina.com" required>
-                </div>
-            </form>
-        </div>
+{% block head %}
+    <link href="{% static 'community/index.css' %}" rel="stylesheet">
+{% endblock head %}
+
+{% block body %}
+    <!-- title & subtitle -->
+    <div class="page d-flex flex-column justify-content-center align-items-center">
+        <h1 class="display-1"><b>ALUMNI MAP</b></h1>
+        <h2 class="text-secondary">BASIS International/Bilingual School · China</h2>
     </div>
 
-    <div class="page d-flex justify-content-evenly ">
-        <div class="home-page-title">
-            <img src="{% static "community/images/location_on.png" %}" width="25" height="25" style="margin-left: 253px;">
-            <img src="{% static "community/images/location_on.png" %}" width="25" height="25" style="margin-left: 78px;">
-            <h1><b> OUR MISSION </b></h1>
+    <div class="page d-flex justify-content-center align-items-center">
+        <div>
+            <h1 class="display-3"><b> OUR MISSION </b></h1>
             <h4>
                 BASIS Alumni Map fosters a supportive community by connecting current students with alumni. 
-                Our platform allows users to explore a map of alumni locations, and access contact 
-                information (with consent). We aim to 
-                facilitate meaningful connections through 
-                private conversations and comments, 
-                empowering both students and alumni to 
-                enhance their educational journey while collaborating with each other.
+                Our platform allows users to explore a map of alumni locations, and access contact information (with consent). 
+                We aim to facilitate meaningful connections through private conversations and comments, empowering both students and alumni to enhance their educational journey while collaborating with each other.
             </h4>
         </div>
-
-        <div>
-            <img src="{% static "community/images/alumni web logo 1.png" %}" width="709" height="552">
-        </div>
+        <img src="{% static "community/images/alumni web logo 1.png" %}" width="709" height="552">
     </div>
 {% endblock body %}

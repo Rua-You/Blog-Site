@@ -1,0 +1,72 @@
+{% extends "community/layout.html" %}
+{% load static %}
+
+{% block title %} 
+    {% if profile_user.username %}
+        {{ profile_user.username }} 
+    {% else %}
+        {{ profile_user.first_name }} {{ profile_user.last_name}}
+    {% endif %}
+{% endblock title %}
+
+{% block head %}
+    <link href="{% static 'community/profile.css' %}" rel="stylesheet">
+{% endblock head %}
+
+{% block body %}
+
+    <!-- Profile Section -->
+    <div class="page-offset d-flex align-items-center justify-content-center">
+        <!-- Left side: profile icon, profile text, and edit button -->
+        <div class="d-flex flex-column align-items-center">
+            {% if profile_user.username %}
+                <h1>{{ profile_user.username }}</h1>
+            {% else %}
+                <h1>{{ profile_user.first_name }} {{ profile_user.last_name }}</h1>
+            {% endif %}
+            <img class="profile-icon" src="{% static "community/images/profile-icon.png" %}">
+            <!-- only show edit button it's the user themselves-->
+            {% if is_self %}
+                <a class="edit-btn" href="{% url "edit_profile" profile_user.id %}" role="button">Edit</a>
+            {% endif %}
+        </div>
+
+        <!-- Right side: info about the user -->
+        <div style="margin-left:100px">
+            
+            <!-- if has a username, show real name on the right side-->
+            {% if profile_user.username %}
+                <h1>{{ profile_user.first_name }} {{ profile_user.last_name }}</h1>
+            {% endif %}
+
+            {% if profile_user.bio %}
+                <p>{{ profile_user.bio }}</p>
+            {% else %}
+                <br>
+            {% endif %}
+            
+            {% if profile_user.email %}
+                <p><b>Email(s):</b> {{ profile_user.email }}
+                    {% if profile_user.email_2 %}
+                    ; {{ profile_user.email_2 }}
+                    {% endif %}
+                </p>
+            {% endif %}
+
+            {% if profile_user.graduation_year %}
+                <p><b>Graduation Year:</b> {{ profile_user.graduation_year }}</p>
+            {% endif %}
+
+            {% if profile_user.major %}
+                <p><b>Major:</b> {{ profile_user.major }}</p>
+            {% endif %}
+
+            {% if profile_user.university %}
+                <p><b>University:</b> {{ profile_user.university }}</p>
+            {% endif %}
+        </div>
+
+        <!-- to get the profile_user in javascript -->
+        <input type="hidden" id="profile-user-id" value="{{ profile_user.id }}">
+    </div>
+{% endblock body %}

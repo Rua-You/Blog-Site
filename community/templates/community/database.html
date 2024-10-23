@@ -1,0 +1,33 @@
+{% extends "community/layout.html" %}
+{% load static %}
+
+{% block title %} Database {% endblock title %}
+
+{% block head %}
+    <link href="{% static 'community/database.css' %}" rel="stylesheet">
+{% endblock head %}
+
+{% block body %}
+
+    <div class="page-offset">
+        <div class="alert alert-light" role="alert">
+            This page shows a list of all users in our database, sorted by name.
+        </div>  
+
+        <ul class="list-group">
+            {% for user in all_users %}
+                <!-- if the user has a username, then they have an account -->
+                {% if user.username %}
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold"><a href="{% url "profile" user.slug %}">{{ user.first_name }} {{ user.last_name }}</a></div>
+                            <div class="username">&nbsp @{{ user.username }}</div>
+                        </div>
+                    </li>
+                {% else %}
+                    <li class="list-group-item">&nbsp&nbsp<b><a href="{% url "profile" user.slug %}">{{ user.first_name }} {{ user.last_name }}</a></b></li>
+                {% endif %}
+            {% endfor %}
+        </ul> 
+    </div>
+{% endblock body %}
