@@ -17,6 +17,18 @@ def index(request):
 
 
 def register_view(request):
+    """
+    This view handles the user registration process. It takes
+    care of the POST request and the validation of the input
+    data. If the data is valid, it will create a new user and
+    save it to the database. If the data is invalid, it will
+    display an error message.
+
+    :param request: The request object
+    :return: A redirect to the verification page if the
+             registration is successful, otherwise a redirect
+             to the registration page with an error message
+    """
     if request.method == 'POST':
         username = request.POST['username']
         email = request.POST['email']
@@ -27,15 +39,20 @@ def register_view(request):
             messages.info(request, 'Passwords must match.')
             return redirect(reverse('register'), permanent=True)
         else:
+            # Check if the email is from a BASIS China domain
             if email.endswith('@basischina.com'):
+                # Check if the email is from a BIGZ student
                 if email.endswith('-bigz@basischina.com'):
+                    # Check if the email already exists
                     if User.objects.filter(email=email).exists():
                         messages.info(request, 'Email already exists.')
                         return redirect(reverse('register'), permanent=True)
+                    # Check if the username already exists
                     if User.objects.filter(username=username).exists():
                         messages.info(request, 'Username taken. Please choose a different one.')
                         return redirect(reverse('register'), permanent=True)
                     
+                    # Create a new user with the input data
                     user = User.objects.create_user(username=username, email=email, password=password1)
                     user.save()
                     # login(request, user)
@@ -50,27 +67,47 @@ def register_view(request):
     return render(request, 'community/register.html')
 
 
-def login_view(request):    
-    if request.method == 'POST':
-        username = request.POST['email']
-        password = request.POST['password']
+def login_view(request):
+    """
+    This view handles the login process. It authenticates the user
+    with the provided username and password. If authentication is
+    successful, the user is logged in and redirected to the index
+    page. Otherwise, an error message is displayed.
 
+    :param request: The request object
+    :return: A redirect to the index page if login is successful,
+             otherwise a redirect to the login page with an error message
+    """
+    if request.method == 'POST':
+        username = request.POST['email']  # Get the username from the POST data
+        password = request.POST['password']  # Get the password from the POST data
+
+        # Authenticate the user with the provided credentials
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
+            # If authentication is successful, log the user in
             login(request, user)
-            return redirect(reverse('index'), permanent=True)
+            return redirect(reverse('index'), permanent=True)  # Redirect to the index page
 
+        # If authentication fails, display an error message
         messages.info(request, 'Invalid username and/or password.')
-        return redirect(reverse('login'), permanent=True)
+        return redirect(reverse('login'), permanent=True)  # Redirect back to the login page
 
+    # Render the login page if the request method is not POST
     return render(request, 'community/login.html')
 
 
 @login_required
 def logout_view(request):
-    logout(request)
-    return redirect(reverse('index'), permanent=True)
+    """
+    This view logs out the user and redirects to the index page.
+
+    :param request: The request object
+    :return: A redirect to the index page
+    """
+    logout(request)  # Log the user out
+    return redirect(reverse('index'), permanent=True)  # Redirect to the index page
 
 
 def verify_account(request):
@@ -78,19 +115,36 @@ def verify_account(request):
 
 
 def forgot_password(request):
+    """
+    This view handles the forgot password process. It checks if the
+    provided email is a valid email address and if the user with the
+    email exists in the database. If the email is valid and the user
+    exists, the user is redirected to the reset password page.
+    Otherwise, an error message is displayed.
+
+    :param request: The request object
+    :return: A redirect to the reset password page if the email is valid
+             and the user exists, otherwise a redirect to the forgot
+             password page with an error message
+    """
     if request.method == 'POST':
         email = request.POST['email']
         if email.endswith('@basischina.com'):
+            # Check if the email belongs to a BIGZ student
             if email.endswith('-bigz@basischina.com'):
                 if User.objects.filter(email=email).exists():
+                    # If the user exists, redirect to the reset password page
                     return redirect(reverse('reset_password'), permanent=True)
                 else:
+                    # If the user does not exist, display an error message
                     messages.info(request, 'Email not found.')
                     return redirect(reverse('forgot_password'), permanent=True)
             else:
+                # If the email does not belong to a BIGZ student, display an error message
                 messages.info(request, 'Sorry, we currently only support BIGZ students.')
                 return redirect(reverse('forgot_password'), permanent=True)
         else:
+            # If the email does not belong to BASIS China, display an error message
             messages.info(request, 'Sorry, we currently only support BASIS China students.')
             return redirect(reverse('forgot_password'), permanent=True)
         
@@ -98,14 +152,28 @@ def forgot_password(request):
 
 
 def reset_password(request):
+    """
+    This view handles the reset password process. It checks if the
+    provided new password and confirm new password match. If the
+    passwords match, the user's password is updated and the user is
+    redirected to the login page. Otherwise, an error message is
+    displayed.
+
+    :param request: The request object
+    :return: A redirect to the login page if the passwords match,
+             otherwise a redirect to the reset password page with an
+             error message
+    """
     if request.method == 'POST':
         new_password = request.POST['new-password']
         confirm_new_password = request.POST['confirm-new-password']
 
+        # Check if the new password and confirm new password match
         if new_password != confirm_new_password:
             messages.info(request, 'Passwords must match.')
             return redirect(reverse('reset_password'), permanent=True)
         else:
+            # If the passwords match, update the user's password
             request.user.set_password(new_password)
             request.user.save()
             return redirect(reverse('login'), permanent=True)
@@ -120,8 +188,17 @@ def map(request):
 
 @login_required
 def profile(request, slug):
-    # slug should be a string
+    """
+    This view displays a user's profile based on the provided slug.
+    The user must be logged in to view profiles. If the profile belongs
+    to the logged-in user, it is marked as 'self'.
 
+    :param request: The request object
+    :param slug: A string representing the user's unique slug
+    :return: A rendered profile page if the user or alumni exists,
+             otherwise an error page
+    """
+    # Check if a registered user with the given slug exists
     if User.objects.filter(slug=slug).exists():
         user = User.objects.get(slug=slug)
         return render(request, 'community/profile.html', {
@@ -130,6 +207,7 @@ def profile(request, slug):
             'is_self': user == request.user
         })
     
+    # Check if an unregistered alumni with the given slug exists
     elif Alumni.objects.filter(slug=slug).exists():
         alumni = Alumni.objects.get(slug=slug)
         return render(request, 'community/profile.html', {
@@ -139,6 +217,7 @@ def profile(request, slug):
             'unregistered': True
         })
     
+    # If no user is found, display an error message
     messages.info(request, 'User not found.')
     return render(request, 'community/error.html')
 
